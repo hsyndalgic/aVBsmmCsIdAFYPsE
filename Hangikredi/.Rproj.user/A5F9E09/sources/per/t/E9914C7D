@@ -1,0 +1,28 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1599588118799.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3653798260",
+    "id" : "E9914C7D",
+    "lastKnownWriteTime" : 1599695108,
+    "last_content_update" : 1599695108421,
+    "path" : "C:/Users/user/Desktop/R_Projeler/Hangikredi/Hangikredi/Cluster_test.Rmd",
+    "project_path" : "Cluster_test.Rmd",
+    "properties" : {
+        "chunk_output_type" : "inline",
+        "cursorPosition" : "50,10",
+        "docOutlineVisible" : "1",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

@@ -1,0 +1,7 @@
+"0",""
+"0",""
+"0","df %>%"
+"0","  select_if(is.numeric) %>%"
+"0","  gather(""age"",""balance"",""duration"",""campaign"", key = ""Variables"", value = ""Values"") %>%"
+"0","  ggplot() +"
+"0","  geom_boxplot(aes(Variables,Values))"

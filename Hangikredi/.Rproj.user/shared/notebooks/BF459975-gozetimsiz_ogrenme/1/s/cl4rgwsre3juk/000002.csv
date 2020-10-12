@@ -1,0 +1,6 @@
+"0","```r
+hc4 <- diana(df)
+hc4$dc
+
+pltree(hc4, cex = 0.6, hang = -1)
+```"

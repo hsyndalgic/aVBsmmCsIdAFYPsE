@@ -1,0 +1,8 @@
+"0","roc(glm_tune$pred$obs,
+    glm_tune$pred$Yes,
+    levels = rev(levels(glm_tune$pred$obs)),
+    plot = TRUE, print.auc = TRUE)
+"
+"2","Error in roc(glm_tune$pred$obs, glm_tune$pred$Yes, levels = rev(levels(glm_tune$pred$obs)),  : 
+  ""roc"" fonksiyonu bulunamadı
+"

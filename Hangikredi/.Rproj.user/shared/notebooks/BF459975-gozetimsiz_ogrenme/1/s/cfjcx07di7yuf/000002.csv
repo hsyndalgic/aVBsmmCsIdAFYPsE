@@ -1,0 +1,17 @@
+"0","```r
+
+m <- c(\"average\", \"single\",\"complete\", \"ward\")
+names(m) <- c(\"average\", \"single\",\"complete\", \"ward\")
+
+
+ac <- function(x) {
+
+  agnes(df, method = x)$ac 
+  
+}
+
+sapply(m, ac)
+
+
+
+```"

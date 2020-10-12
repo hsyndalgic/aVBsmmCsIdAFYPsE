@@ -1,0 +1,5 @@
+"0","tepe_kolonlari <- list(total(label = ""Toplam""), df$Cinsiyet, df$YasAralik, df$SesGrubu)
+"
+"2","Unknown or uninitialised column: 'Cinsiyet'."
+"2","Unknown or uninitialised column: 'YasAralik'."
+"2","Unknown or uninitialised column: 'SesGrubu'."

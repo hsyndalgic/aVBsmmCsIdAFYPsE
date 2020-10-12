@@ -1,0 +1,11 @@
+"0","```r
+library(fpc)
+df <- iris[-5]
+ds <- dbscan(df, eps = 0.40, MinPts = 5)
+
+
+table(ds$cluster, iris$Species)
+
+plot(ds, df)
+plot(ds, iris[c(1,4)])
+```"

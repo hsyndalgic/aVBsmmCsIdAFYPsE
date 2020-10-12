@@ -1,0 +1,20 @@
+"0","```r
+library(tibble)
+library(expss) # tablolama icin gerekli
+library(xlsx) #datayi okumak icin gerekli
+library(sjlabelled) #Sorulari yazdirabilmek icin
+library(dplyr) 
+
+
+##data okuma
+my_data <- read.xlsx(\"X1297W1.marketing_1-1.xlsx\", 1)  # 1. sheet i okuyuor.
+my_data_questions <- read.xlsx(\"Description.xlsx\", 1,stringsAsFactors=FALSE) #sorular 
+my_data_values <- read.xlsx(\"Description.xlsx\", 2,stringsAsFactors=FALSE) #secenek isimleri
+
+#original dataya dokunmuyorum df de calisacagim
+df <- my_data
+df_questions <- my_data_questions
+df_values<- my_data_values
+
+
+```"

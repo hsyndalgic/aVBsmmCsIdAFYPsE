@@ -1,0 +1,884 @@
+---
+title: "HangiKredi"
+author: "Hüseyin Dalgıç"
+date: "28 08 2020"
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+# Data
+```{r}
+library(readr)
+term_deposit_marketing_2020 <- read_csv("C:/Users/user/Desktop/R_Projeler/Hangikredi/Hangikredi/term-deposit-marketing-2020(2).csv")
+
+
+dataset<-term_deposit_marketing_2020
+
+
+```
+
+#Data examine and treating data before feature engineering
+
+```{r}
+library(tidyverse)
+library(ROCR)
+library(mice)
+library(VIM)
+library(BaylorEdPsych)
+library(DMwR) #knn 
+library(missForest) #rf
+library(caret)
+library(mclust)
+library(ggfortify)
+library(PerformanceAnalytics)
+library(funModeling)
+library(randomForest)
+library(gbm)
+library(ggplot2)
+
+
+
+
+df<-dataset
+
+summary(df)
+str(df)
+
+
+#replace "unknow" to NA
+df[df == "unknown"] <- NA
+
+
+
+#Converting all character variables to factor variables
+df<-df %>%
+  mutate_if(sapply(df, is.character), as.factor)
+
+
+```
+
+
+
+#Missing value examine
+
+```{r}
+
+#Percetantage of missing values for eahh variables
+
+colSums(is.na(df))/nrow(df)
+
+#At least has one missing values for each observation
+df[!complete.cases(df),]
+
+#Variables has no missing values
+df[, colSums(is.na(df))==0]
+
+#Missing values graphs
+
+md.pattern(df)
+
+     
+
+aggr(df, col=c('navyblue','red'), 
+                  numbers = TRUE, 
+                  sortVars = TRUE, 
+                  labels = names(df), 
+                  cex.axis=.7, 
+                  gap=3, 
+                  ylab=c("Percentage of missing values",
+                         "Structure of missing values in dataset"))
+
+
+
+
+```
+
+# missing values hypotesis test
+```{r}
+
+r_test <- LittleMCAR(df)
+
+attributes(r_test)
+
+r_test$amount.missing 
+r_test$p.value
+
+#H0 is rejected.
+
+```
+
+# Treating missing values
+
+## Creating random fake missing values for each variables to see how we can predict them
+```{r}
+
+set.seed(123)
+job_miss_index <-sample (which(!is.na(df$job)), size=10, replace =F)
+education_miss_index <-sample (which(!is.na(df$education)), size=10, replace =F)
+contact_miss_index <-sample (which(!is.na(df$contact)), size=10, replace =F)
+
+df[job_miss_index, "job"] <- NA 
+df[education_miss_index, "education"] <- NA
+df[contact_miss_index, "contact"] <- NA
+
+
+l <- list(job=job_miss_index,education=education_miss_index,contact=contact_miss_index)
+
+
+
+#to reach out observations in main dataset
+dataset[c(l$job),]$job
+dataset[c(l$education),]$education
+dataset[c(l$contact),]$contact
+
+```
+
+
+
+
+## To predict missing values
+```{r}
+df_all <- data.frame(df, rnorm(nrow(df)))
+
+rf_data <- missForest(df_all)
+rf_data <- rf_data$ximp
+anyNA(rf_data)
+colSums(is.na(rf_data))
+str(rf_data)
+summary(rf_data)
+
+knn_data <- knnImputation(df_all, k = 5) 
+anyNA(knn_data)
+colSums(is.na(knn_data))
+str(knn_data)
+summary(knn_data)
+
+
+
+
+```
+
+
+
+
+## Comparising with fake missing values with predicted values and decide ml model
+
+```{r}
+#to reach out observations in main dataset
+dataset[c(l$job),]$job
+dataset[c(l$education),]$education
+dataset[c(l$contact),]$contact
+
+
+defaultSummary(data.frame(obs = dataset[c(l$job),]$job,
+pred = rf_data[c(l$job),]$job))
+
+defaultSummary(data.frame(obs = dataset[c(l$job),]$job,
+pred = knn_data[c(l$job),]$job))
+
+
+df$job<-knn_data$job
+
+
+defaultSummary(data.frame(obs = dataset[c(l$education),]$education,
+pred = rf_data[c(l$education),]$education))
+
+defaultSummary(data.frame(obs = dataset[c(l$education),]$education,
+pred = knn_data[c(l$education),]$education))
+
+df$education<-rf_data$education
+
+
+defaultSummary(data.frame(obs = dataset[c(l$contact),]$contact,
+pred = rf_data[c(l$contact),]$contact))
+
+defaultSummary(data.frame(obs = dataset[c(l$contact),]$contact,
+pred = knn_data[c(l$contact),]$contact))
+
+
+df$contact<-rf_data$contact
+
+
+summary(df)
+
+```
+
+
+
+# Outlier detection for each numeric variables
+
+```{r}
+
+outliers<-function(x) 
+  {which(x %in% boxplot.stats(x)$out)}
+
+
+
+a<-apply(df %>% select_if(is.numeric), 2, outliers) #Outlier indexes
+
+str(a)
+
+
+intersect(a$age,a$balance)
+intersect(a$duration,a$balance)
+intersect(a$duration,a$campaign)
+intersect(a$campaign,a$balance)
+
+int1<-intersect(a$campaign,intersect(a$balance,a$age))
+int2<-intersect(a$campaign,intersect(a$balance,a$duration))
+int3<-intersect(a$age,intersect(a$duration,a$balance))
+int4<-intersect(a$age,intersect(a$duration,a$campaign))
+
+
+#For 4 all variables 3th intersect indexes 
+same_outliers<-Reduce(union, list(int1,int2,int3,int4))
+
+#For all variables's outliers indexes
+all_outliers<-Reduce(union,  a)
+
+etiketler<-rep(".",nrow(df))
+etiketler[same_outliers] <-same_outliers
+
+biplot(prcomp(df %>%
+     select_if(is.numeric)), cex = 1, xlabs = etiketler)
+
+
+etiketler<-rep(".",nrow(df))
+etiketler[all_outliers] <-all_outliers
+
+biplot(prcomp(df %>%
+     select_if(is.numeric)), cex = 1, xlabs = etiketler)
+
+
+df %>%
+  select_if(is.numeric) %>%
+  gather("age","balance","duration","campaign", key = "Variables", value = "Values") %>%
+  ggplot() +
+  geom_boxplot(aes(Variables,Values))
+
+
+
+
+```
+
+
+
+## Treating outliers
+```{r}
+
+summary(df)
+
+
+a <- which(df$age %in% boxplot.stats(df$age)$out)
+b <- which(df$balance %in% boxplot.stats(df$balance)$out)
+c <- which(df$duration %in% boxplot.stats(df$duration)$out)
+d <- which(df$campaign %in% boxplot.stats(df$campaign)$out)
+
+df[a, "age"][df[a, ]$age>median(df$age),] <- fivenum(df$age)[4]
+df[a, "age"][df[a, ]$age<median(df$age),] <- fivenum(df$age)[2]
+
+df[b, "balance"][df[b, ]$balance>median(df$balance),] <- fivenum(df$balance)[4]
+df[b, "balance"][df[b, ]$balance<median(df$balance),] <- fivenum(df$balance)[2]
+
+df[c, "duration"][df[c, ]$duration>median(df$duration),] <- fivenum(df$duration)[4]
+df[c, "duration"][df[c, ]$duration<median(df$duration),] <- fivenum(df$duration)[2]
+
+df[d, "campaign"][df[d, ]$campaign>median(df$campaign),] <- fivenum(df$campaign)[4]
+df[d, "campaign"][df[d, ]$campaign<median(df$campaign),] <- fivenum(df$campaign)[2]
+
+#check outliers
+
+
+
+df %>%
+  select_if(is.numeric) %>%
+  gather("age","balance","duration","campaign", key = "Variables", value = "Values") %>%
+  ggplot() +
+  geom_boxplot(aes(Variables,Values))
+
+
+
+
+
+```
+
+
+
+## Outlier detection local outlier for multiple variables
+
+```{r}
+
+
+outlier_score <- lofactor(df %>%
+  select_if(is.numeric), k = 5)
+
+
+
+#outlier plot
+
+ggplot() +
+  geom_density(data.frame(outlier_score), mapping=aes(outlier_score))
+
+#outlier boxplot
+
+outlier_count<-length(boxplot.stats(outlier_score)$out)
+
+
+out_labels<-rep(".", nrow(df))
+
+
+out_labels[order(outlier_score, decreasing = T)[1:outlier_count]] <- order(outlier_score, decreasing = T)[1:outlier_count]
+
+biplot(prcomp(df %>% select_if(is.numeric)), cex = 1, xlabs = out_labels)
+
+```
+
+# Outlier detection with clustering
+
+```{r}
+
+set.seed(1990)
+lca_clust <- Mclust(df %>% select_if(is.numeric),verbose = FALSE)
+summary(lca_clust)
+
+
+
+df_class<-kmeans(df %>% select_if(is.numeric),6)
+
+classes <- df_class$centers[df_class$cluster, ]
+
+distances<- sqrt(rowSums((df %>% select_if(is.numeric)-classes)^2))
+
+length(boxplot.stats(distances)$out)
+
+distances_coordinate<-order(distances, decreasing = T)[1:length(boxplot.stats(distances)$out)]
+
+df$class<-factor(df_class$cluster)
+
+
+
+ggplot()+
+  geom_point(df, mapping=aes(balance,age, color=class)) +
+  geom_point(df[distances_coordinate,], mapping=aes(balance,age, fill="Outlier"), size=3, shape=4) +
+  geom_point(df_class$centers, mapping=aes(balance,age), size=6, color="red", shape=15)
+
+# Biplot uzerinde gosterimi
+autoplot(prcomp(df %>% select_if(is.numeric)), data=df, colour="class", loadings=T,loadings.label = TRUE,loadings.colour = 'purple', frame=T )
+
+
+same_indexes<-intersect(order(distances, decreasing = T)[1:length(boxplot.stats(distances)$out)],order(outlier_score, decreasing = T)[1:length(boxplot.stats(outlier_score)$out)])
+
+
+ggplot()+
+  geom_point(df, mapping=aes(balance,age, color=class)) +
+  geom_point(df[same_indexes,], mapping=aes(balance,age, fill="Outlier"), size=3, shape=4) +
+  geom_point(df_class$centers, mapping=aes(balance,age), size=6, color="red", shape=15)
+
+
+```
+
+
+## Outlier treating remove same indexes
+
+```{r}
+df_copy<-df
+df<-df_copy
+
+
+
+df<-df[,1:length(df)-1] #remove class variable
+
+
+df<-df[-same_indexes,]
+
+
+
+```
+
+
+
+
+
+# Data Transformation
+
+```{r}
+
+chart.Correlation(df %>% select_if(is.numeric))
+
+df$day<-factor(df$day)
+df$campaign<-factor(df$campaign)
+
+
+
+
+
+normalize <- function(x) {
+  
+  (x-min(x))/(max(x)-min(x))
+  
+}
+
+
+
+df<-df %>%
+    mutate_if(is.numeric, normalize)#Standardization
+
+summary(df$y)
+
+
+```
+#Imalanced Data
+
+```{r}
+#balance 
+df_balanced<-df[df$y=="yes",]
+df<-rbind(df,df_balanced,df_balanced)
+
+```
+
+
+
+
+# Train Test Ayrimi
+```{r}
+train_indeks <- createDataPartition(df$y, p = 0.8, list = FALSE, times = 1)
+
+train <- df[train_indeks,]
+test <- df[-train_indeks,]
+
+train_x <- train %>% dplyr::select(-y)
+train_y <- train$y
+
+test_x <- test %>% dplyr::select(-y)
+test_y <- test$y
+
+training <- data.frame(train_x, y = train_y)
+
+
+```
+
+# Examine Final Data
+
+```{r}
+
+glimpse(df)
+profiling_num(df)
+plot_num(df)
+freq(df)
+
+```
+
+
+# GLM Model
+```{r}
+
+ctrl <- trainControl(method = "cv", 
+                     number = 5, 
+                     summaryFunction = twoClassSummary,
+                     classProbs = TRUE,
+                     savePredictions = TRUE)
+
+
+
+
+glm_tune <- train(train_x, 
+                  train_y, 
+                  method = "glm",
+                  trControl = ctrl)
+ 
+glm_tune
+
+head(glm_tune$pred$yes)
+
+
+defaultSummary(data.frame(obs = test_y, 
+                          pred = predict(glm_tune, test_x)))
+
+#egitim
+confusionMatrix(data = predict(glm_tune, train_x),
+                reference = train_y, positive = "yes")
+
+
+confusionMatrix(data = predict(glm_tune, test_x),
+                reference = test_y, positive = "yes")
+
+
+confusionMatrix(data = predict(glm_tune, df %>% select(-y)),
+                reference = df$y, positive = "yes")
+
+
+```
+
+# YSA  Model Tuning
+
+```{r}
+
+ctrl <- trainControl(method="cv",
+                     summaryFunction = twoClassSummary,
+                     classProbs = TRUE)
+
+
+nnetGrid <- expand.grid(size = 1:10,
+                         decay = c(0, 0.1, 1, 2))
+
+maxSize <- max(nnetGrid$size)
+
+numWts <- 1*(maxSize * (length(train_x) + 1) + maxSize + 1)
+
+
+nnet_tune <- train(
+  train_x, train_y,
+  method = "nnet",
+  metric = "ROC",
+  tuneGrid = nnetGrid,
+  trace = FALSE, 
+  maxit = 2000,
+  MaxNWts = numWts,
+  trControl = ctrl
+  
+)
+plot(nnet_tune)
+nnet_tune$bestTune
+pred <- predict(nnet_tune, test_x)
+
+
+
+confusionMatrix(factor(pred), test_y, positive = "yes")
+
+
+```
+
+
+
+# Model GBM
+
+
+```{r}
+
+train$y <- as.numeric(train$y)
+train <- transform(train, y = y - 1)
+
+gbm_fit <- gbm(y~., data = train, 
+               shrinkage = 0.01,
+               distribution = "bernoulli",
+               cv.folds = 5,
+               n.trees = 3000,
+               verbose = F)
+
+summary(gbm_fit)
+
+gbm.perf(gbm_fit, method = "cv")
+
+```
+
+## Tahmin
+
+
+```{r}
+
+pred <- predict.gbm(gbm_fit, test_x, type = "response")
+head(pred)
+
+model_gbm_pred <- factor(ifelse(predict.gbm(gbm_fit, test_x, type = "response") > 0.5, "yes","no"))
+
+
+confusionMatrix(model_gbm_pred, test_y, positive = "yes")
+
+
+```
+
+
+
+
+Xgboost hyperparametre tuning
+
+
+    nrounds: Number of trees, default: 100
+    max_depth: Maximum tree depth, default: 6
+    eta: Learning rate, default: 0.3
+    gamma: Used for tuning of Regularization, default: 0
+    colsample_bytree: Column sampling, default: 1
+    min_child_weight: Minimum leaf weight, default: 1
+    subsample: Row sampling, default: 1
+
+We’ll break down the tuning of these into five sections:
+
+    Fixing learning rate eta and number of iterations nrounds
+    Maximum depth max_depth and child weight min_child_weight
+    Setting column colsample_bytree and row sampling subsample
+    Experimenting with different gamma values
+    Reducing the learning rate eta
+
+
+
+
+
+# XGBoost Model 
+## Step1
+```{r}
+
+set.seed(123)
+
+grid_default <- expand.grid(
+  nrounds = 100,
+  max_depth = 6,
+  eta = 0.3,
+  gamma = 0,
+  colsample_bytree = 1,
+  min_child_weight = 1,
+  subsample = 1
+)
+
+train_control <- caret::trainControl(
+  method = "none",
+  verboseIter = FALSE, # no training log
+  allowParallel = TRUE, # FALSE for reproducible results 
+)
+
+xgb_base <- caret::train(
+  y~., data = train,
+  trControl = train_control,
+  tuneGrid = grid_default,
+  method = "xgbTree",
+  verbose = TRUE
+)
+
+confusionMatrix(factor(predict(xgb_base, test_x)), factor(test_y), positive = "yes")
+
+confusionMatrix(factor(predict(xgb_base, train_x)), factor(train_y), positive = "yes")
+
+```
+
+
+## Step 2
+
+```{r}
+
+# note to start nrounds from 200, as smaller learning rates result in errors so
+# big with lower starting points that they'll mess the scales
+nrounds <- 1000
+tune_grid <- expand.grid(
+  nrounds = seq(from = 200, to = nrounds, by = 50),
+  eta = c(0.025, 0.05, 0.1, 0.3),
+  max_depth = c(2, 3, 4, 5, 6),
+  gamma = 0,
+  colsample_bytree = 1,
+  min_child_weight = 1,
+  subsample = 1
+)
+
+tune_control <- caret::trainControl(
+  method = "cv", # cross-validation
+  number = 5, # with n folds 
+  #index = createFolds(tr_treated$Id_clean), # fix the folds
+  verboseIter = FALSE, # no training log
+  allowParallel = TRUE # FALSE for reproducible results 
+)
+
+xgb_tune <- caret::train(
+  y~., data = train,
+  trControl = tune_control,
+  tuneGrid = tune_grid,
+  method = "xgbTree",
+  verbose = TRUE
+)
+
+# helper function for the plots
+tuneplot <- function(x, probs = .90) {
+  ggplot(x) +
+    coord_cartesian(ylim = c(quantile(x$results$Accuracy, probs = probs), min(x$results$Accuracy))) +
+    theme_bw()
+}
+
+xgb_tune$bestTune
+
+
+tuneplot(xgb_tune)
+
+confusionMatrix(factor(predict(xgb_tune, test_x)), factor(test_y), positive = "yes")
+
+
+
+
+
+```
+
+
+## Step 3
+
+```{r}
+
+# note to start nrounds from 200, as smaller learning rates result in errors so
+# big with lower starting points that they'll mess the scales
+
+tune_grid2 <- expand.grid(
+  nrounds = seq(from = 200, to = nrounds, by = 50),
+  eta = xgb_tune$bestTune$eta,
+  max_depth = xgb_tune$bestTune$max_depth,
+  gamma = 0,
+  colsample_bytree = 1,
+  min_child_weight = c(1, 2, 3),
+  subsample = 1
+)
+
+tune_control <- caret::trainControl(
+  method = "cv", # cross-validation
+  number = 5, # with n folds 
+  #index = createFolds(tr_treated$Id_clean), # fix the folds
+  verboseIter = FALSE, # no training log
+  allowParallel = TRUE # FALSE for reproducible results 
+)
+
+xgb_tune2 <- caret::train(
+  y~., data = train,
+  trControl = tune_control,
+  tuneGrid = tune_grid2,
+  method = "xgbTree",
+  verbose = TRUE
+)
+
+
+xgb_tune2$bestTune
+
+
+tuneplot(xgb_tune2)
+
+confusionMatrix(factor(predict(xgb_tune2, test_x)), factor(test_y), positive = "yes")
+
+
+```
+
+## Step 4
+
+```{r}
+
+# note to start nrounds from 200, as smaller learning rates result in errors so
+# big with lower starting points that they'll mess the scales
+
+tune_grid3 <- expand.grid(
+  nrounds = seq(from = 200, to = nrounds, by = 50),
+  eta = xgb_tune$bestTune$eta,
+  max_depth = xgb_tune$bestTune$max_depth,
+  gamma = 0,
+  colsample_bytree = c(0.4, 0.6, 0.8, 1.0),
+  min_child_weight = xgb_tune2$bestTune$min_child_weight,
+  subsample = c(0.5, 0.75, 1.0)
+)
+
+tune_control <- caret::trainControl(
+  method = "cv", # cross-validation
+  number = 5, # with n folds 
+  #index = createFolds(tr_treated$Id_clean), # fix the folds
+  verboseIter = FALSE, # no training log
+  allowParallel = TRUE # FALSE for reproducible results 
+)
+
+xgb_tune3 <- caret::train(
+  y~., data = train,
+  trControl = tune_control,
+  tuneGrid = tune_grid3,
+  method = "xgbTree",
+  verbose = TRUE
+)
+
+
+xgb_tune3$bestTune
+
+
+tuneplot(xgb_tune3)
+
+confusionMatrix(factor(predict(xgb_tune3, test_x)), factor(test_y), positive = "yes")
+
+
+```
+
+
+## Step 5
+
+```{r}
+
+# note to start nrounds from 200, as smaller learning rates result in errors so
+# big with lower starting points that they'll mess the scales
+
+tune_grid4 <- expand.grid(
+  nrounds = seq(from = 200, to = nrounds, by = 50),
+  eta = xgb_tune$bestTune$eta,
+  max_depth = xgb_tune$bestTune$max_depth,
+  gamma = c(0, 0.05, 0.1, 0.5, 0.7, 0.9, 1.0),
+  colsample_bytree = xgb_tune3$bestTune$colsample_bytree,
+  min_child_weight = xgb_tune2$bestTune$min_child_weight,
+  subsample = xgb_tune3$bestTune$subsample
+)
+
+tune_control <- caret::trainControl(
+  method = "cv", # cross-validation
+  number = 5, # with n folds 
+  #index = createFolds(tr_treated$Id_clean), # fix the folds
+  verboseIter = FALSE, # no training log
+  allowParallel = TRUE # FALSE for reproducible results 
+)
+
+xgb_tune4 <- caret::train(
+  y~., data = train,
+  trControl = tune_control,
+  tuneGrid = tune_grid4,
+  method = "xgbTree",
+  verbose = TRUE
+)
+
+
+xgb_tune4$bestTune
+
+
+tuneplot(xgb_tune4)
+
+confusionMatrix(factor(predict(xgb_tune4, test_x)), factor(test_y), positive = "yes")
+
+
+```
+
+
+#Conclusion
+```{r}
+
+tuneplot(xgb_tune)
+
+confusionMatrix(factor(predict(xgb_tune, test_x)), factor(test_y), positive = "yes")
+
+confusionMatrix(factor(predict(xgb_base, test_x)), factor(test_y), positive = "yes")
+
+confusionMatrix(factor(predict(xgb_base, df %>% select(-y))), factor(df$y), positive = "yes")
+
+confusionMatrix(factor(predict(xgb_tune, df %>% select(-y))), factor(df$y), positive = "yes")
+
+saveRDS(xgb_tune, "./hsyndalgic_model.rds")
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

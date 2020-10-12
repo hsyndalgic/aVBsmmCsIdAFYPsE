@@ -1,0 +1,6 @@
+"0","```r
+set.seed(123)
+final <- kmeans(df, 4, nstart = 24)
+print(final)
+
+```"

@@ -1,0 +1,19 @@
+"0","```r
+fviz_nbclust(df, FUN = hcut, method = \"silhouette\")
+
+gs <- clusGap(df, FUN = hcut, nstart = 25, K.max =  10, B = 50)
+fviz_gap_stat(gs)
+
+son <- hclust(d, method = \"ward.D\")
+alt_grup <- cutree(son, k = 3)
+
+head(alt_grup)
+USArrests %>% 
+  mutate(cluster = alt_grup)
+
+USArrests %>%
+  mutate(Cluster = alt_grup) %>%
+  group_by(Cluster) %>%
+  summarise_all(\"mean\")
+
+```"

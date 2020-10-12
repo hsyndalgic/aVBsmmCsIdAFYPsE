@@ -1,0 +1,12 @@
+"0","```r
+
+df %>% as_tibble() %>%
+  mutate(kumeler = k2$cluster, 
+         eyaletler = row.names(USArrests)) %>%
+  ggplot(aes(UrbanPop, Murder, color = factor(kumeler), label = eyaletler)) +
+  geom_text()
+
+
+
+
+```"

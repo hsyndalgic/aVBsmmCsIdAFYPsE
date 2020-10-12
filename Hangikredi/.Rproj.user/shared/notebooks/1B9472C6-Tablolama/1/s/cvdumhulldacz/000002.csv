@@ -1,0 +1,10 @@
+"0","```r
+
+#1.sistem degiskenlerinden kurtulduk
+df <- df[ ,-c(which(colnames(df)==\"sys_SequentialRespNum\"):which(colnames(df)==\"sys_CAPIDeviceID\"))]
+
+#2.sistem degiskenlerinden kurtulduk
+df <- df[ ,-c(which(colnames(df)==\"KisiMeslekListCons_1\"):length(colnames(df)))]
+
+
+```"

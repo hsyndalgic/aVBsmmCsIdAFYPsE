@@ -1,0 +1,16 @@
+"0","```r
+den <- hclust(d, method = \"ward.D2\")
+alt_grup <- cutree(den, k = 4)
+table(alt_grup)
+head(alt_grup,10)
+
+USArrests %>% 
+  mutate(cluster = alt_grup) %>% 
+  filter(cluster == 1) %>% 
+  select(Murder)
+
+
+plot(den, cex = 0.6)
+rect.hclust(den, k = 4, border = 2:5)
+
+```"

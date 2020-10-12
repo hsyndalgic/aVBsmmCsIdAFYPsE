@@ -1,0 +1,4 @@
+"0",""
+"0","k2 <- kmeans(scale(df_cluster), centers = 2, nstart = 25)"
+"0",""
+"0",""

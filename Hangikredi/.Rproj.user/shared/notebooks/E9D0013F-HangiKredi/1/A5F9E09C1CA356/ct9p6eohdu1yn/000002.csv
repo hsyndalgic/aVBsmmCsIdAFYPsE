@@ -1,0 +1,25 @@
+"0","library(readr)"
+"0","term_deposit_marketing_2020 <- read_csv(""C:/Users/user/Desktop/R_Projeler/Hangikredi/term-deposit-marketing-2020.csv"")"
+"2","Parsed with column specification:
+cols(
+  age = [32mcol_double()[39m,
+  job = [31mcol_character()[39m,
+  marital = [31mcol_character()[39m,
+  education = [31mcol_character()[39m,
+  default = [31mcol_character()[39m,
+  balance = [32mcol_double()[39m,
+  housing = [31mcol_character()[39m,
+  loan = [31mcol_character()[39m,
+  contact = [31mcol_character()[39m,
+  day = [32mcol_double()[39m,
+  month = [31mcol_character()[39m,
+  duration = [32mcol_double()[39m,
+  campaign = [32mcol_double()[39m,
+  y = [31mcol_character()[39m
+)
+"
+"0","View(term_deposit_marketing_2020)"
+"0",""
+"0","dataset<-term_deposit_marketing_2020"
+"0",""
+"0",""

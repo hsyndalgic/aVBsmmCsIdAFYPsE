@@ -1,0 +1,1 @@
+{"frames":[],"message":"Error in roc(glm_tune$pred$obs, glm_tune$pred$yes, levels = rev(levels(glm_tune$pred$obs)),  : \n  \"roc\" fonksiyonu bulunamadı\n"}

@@ -1,0 +1,1 @@
+{"frames":[{"character_number":0,"end_character_number":0,"end_line_number":0,"file":"","func":"rbind(df, df_balance, df_balanced)","line_number":0}],"message":"Error in rbind(df, df_balance, df_balanced) : \n  'df_balance' nesnesi bulunamadı\n"}

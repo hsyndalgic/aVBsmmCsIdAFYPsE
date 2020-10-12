@@ -1,0 +1,3 @@
+"0",""
+"0","#Variables has no missing values"
+"0","df[, colSums(is.na(df))==0]"

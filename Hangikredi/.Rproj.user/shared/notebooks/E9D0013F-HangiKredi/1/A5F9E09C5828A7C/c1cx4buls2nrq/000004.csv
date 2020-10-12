@@ -1,0 +1,8 @@
+"0","rf_gridsearch <- train(y ~ ., 
+                       data = train,
+                       method = 'rf',
+                       metric = 'Accuracy',
+                       tuneGrid = tunegrid)
+"
+"2","
+"

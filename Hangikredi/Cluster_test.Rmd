@@ -1,0 +1,431 @@
+---
+title: "Cluster"
+author: "Hüseyin Dalgıç"
+date: "08 09 2020"
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+
+#Libraries
+
+```{r}
+library(ggplot2)
+library(tidyverse)
+library(expss)
+library(NbClust)
+library(mclust)
+library(gmodels)
+library(funModeling)
+library(cluster)    #kumeleme
+library(factoextra) #gorsel
+library(gridExtra)
+library("fpc")
+library(gridExtra)
+
+```
+
+# Explore data
+```{r}
+
+library(readr)
+term_deposit_marketing_2020 <- read_csv("C:/Users/user/Desktop/R_Projeler/Hangikredi/term-deposit-marketing-2020.csv")
+
+
+dataset<-term_deposit_marketing_2020
+
+df<-dataset
+
+summary(df)
+str(df)
+
+
+#replace "unknow" to NA
+df[df == "unknown"] <- NA
+
+
+
+#Converting all character variables to factor variables
+df<-df %>%
+  mutate_if(sapply(df, is.character), as.factor)
+
+
+
+plot_num(df)
+freq(df)
+
+
+
+```
+
+# Detecting interval range for numeric variables
+
+## Age
+```{r}
+set.seed(1989)
+
+age_class <- Mclust(df$age,verbose = FALSE)
+
+summary(age_class)
+
+df$age_range <- age_class$classification
+
+
+
+
+
+table(df$age_range,df$age)
+
+ggplot(df) +
+  geom_density(aes(age, color=factor(age_range), fill=y))
+
+
+df %>% 
+    tab_cells(age) %>%
+    tab_cols(age_range) %>% 
+    tab_stat_fun("Toplam"=w_n, "Min"=w_min, "Max"=w_max, method=list) %>% 
+    tab_pivot() %>% 
+    set_caption("Table with summary statistics and significance marks.")
+
+
+df<-df %>% 
+  mutate(age_recode = case_when(
+    age_range == 1  ~ "19-30",
+    age_range >= 2 &age_range <= 5  ~ "31-40",
+    age_range >= 6 &age_range <= 7  ~ "41-55",
+    age_range >= 8  ~ "56+",
+  )
+)
+
+
+```
+
+
+## balance
+
+```{r}
+
+
+df<-df %>% 
+  mutate(balance_recode = case_when(
+    balance <= 0  ~ "(<=0)",
+    balance > 0  ~ "(>0)"
+  )
+)
+
+
+
+```
+
+
+## day
+```{r}
+set.seed(1989)
+
+day_class <- Mclust(df$day,verbose = FALSE)
+
+summary(day_class)
+
+df$day_range <- day_class$classification
+
+
+
+
+
+table(df$day_range,df$day)
+
+ggplot(df) +
+  geom_density(aes(day, color=factor(day_range), fill=y))
+
+ggplot(df) +
+  geom_density(aes(day, fill=factor(day_range)))
+
+df %>% 
+    tab_cells(day) %>%
+    tab_cols(day_range) %>% 
+    tab_stat_fun("Toplam"=w_n, "Min"=w_min, "Max"=w_max, method=list) %>% 
+    tab_pivot() %>% 
+    set_caption("Table with summary statistics and significance marks.")
+
+
+df<-df %>% 
+  mutate(day_recode = case_when(
+    day_range >= 1 &day_range <= 3  ~ "1-9",
+    day_range == 4  ~ "10-14",
+    day_range >= 5 &day_range <= 7  ~ "15-21",
+    day_range == 8  ~ "22-26",
+    day_range ==9  ~ "27-31"
+  )
+)
+
+
+
+```
+
+
+
+
+## duration
+```{r}
+set.seed(1989)
+
+duration_class <- Mclust(df$duration,verbose = FALSE)
+
+summary(duration_class)
+
+df$duration_range <- duration_class$classification
+
+
+
+ggplot(df) +
+  geom_density(aes(duration, color=factor(duration_range), fill=y))
+
+ggplot(df) +
+  geom_density(aes(duration, fill=factor(duration_range)))
+
+df %>% 
+    tab_cells(duration) %>%
+    tab_cols(duration_range) %>% 
+    tab_stat_fun("Toplam"=w_n, "Min"=w_min, "Max"=w_max, method=list) %>% 
+    tab_pivot() %>% 
+    set_caption("Table with summary statistics and significance marks.")
+
+
+df<-df %>% 
+  mutate(duration_recode = case_when(
+    duration_range ==1  ~ "0-28",
+    duration_range >= 2 & duration_range <= 4  ~ "29-181",
+    duration_range >= 5  ~ "257+",
+  )
+)
+
+
+
+```
+
+
+
+
+## campaign
+```{r}
+
+df<-df %>% 
+  mutate(campaign_recode = case_when(
+    campaign >=1 &  campaign <=2 ~ "1-2",
+    campaign >2  ~ "2+"
+  )
+)
+
+
+
+```
+
+
+# Cluster
+
+```{r}
+
+summary(df)
+
+
+df<-df %>% mutate_if(is.character, as.factor)
+
+df_cluster<-df %>% select(duration,campaign)
+
+df_cluster_copy<-df_cluster
+
+
+```
+## Kmenas
+
+```{r}
+
+k2 <- kmeans(scale(df_cluster), centers = 2, nstart = 25)
+
+
+```
+
+
+## Graphs
+
+
+```{r}
+fviz_cluster(k2, data = scale(df_cluster))
+
+
+```
+With Scatter chart
+```{r}
+
+df %>% as_tibble() %>%
+  mutate(kumeler = k2$cluster, 
+         codes = row.names(df)) %>%
+  ggplot(aes(balance, age, color = factor(kumeler), label = codes)) +
+  geom_text()
+
+
+
+
+```
+
+Graph of all cluster solutions
+```{r}
+
+k3 <- kmeans(scale(df_cluster) , centers = 3, nstart = 25)
+k4 <- kmeans(scale(df_cluster) , centers = 4, nstart = 25)
+k5 <- kmeans(scale(df_cluster) , centers = 5, nstart = 25)
+
+p1 <- fviz_cluster(k2, geom = "point", data = scale(df_cluster)) + ggtitle("k=2")
+p2 <- fviz_cluster(k3, geom = "point", data = scale(df_cluster)) + ggtitle("k=3")
+p3 <- fviz_cluster(k4, geom = "point", data = scale(df_cluster)) + ggtitle("k=4")
+p4 <- fviz_cluster(k5, geom = "point", data = scale(df_cluster)) + ggtitle("k=5")
+
+
+grid.arrange(p1, p2, p3, p4, nrow = 2)
+
+
+```
+
+
+## Detecting cluster numbers with latent cluster analysis
+```{r}
+set.seed(1989)
+
+lca_clust <- Mclust(scale(df_cluster),verbose = FALSE)
+summary(lca_clust)
+
+k7 <- kmeans(scale(df_cluster) , centers = 7, nstart = 25)
+
+
+k7$centers
+
+
+centers <- data.frame(duration=(data.frame(k7$centers)$duration*sd(df$duration) + mean(df$duration))/60,
+                      campaign=data.frame(k7$centers)$campaign*sd(df$campaign) + mean(df$campaign))
+
+
+fviz_cluster(k7, geom = "point", data = scale(df_cluster)) + ggtitle("k=7")
+
+
+
+
+```
+
+# Final cluster 
+```{r}
+
+k7 <- kmeans(scale(df_cluster) , centers = 3, nstart = 25)
+
+
+k7$centers
+
+
+centers <- data.frame(duration=(data.frame(k7$centers)$duration*sd(df$duration) + mean(df$duration))/60,
+                      campaign=data.frame(k7$centers)$campaign*sd(df$campaign) + mean(df$campaign))
+
+
+fviz_cluster(k7, geom = "point", data = scale(df_cluster)) + ggtitle("k=7")
+
+df$clusters<-k7$cluster
+
+
+df<-df %>% 
+  mutate(clusters_recode = case_when(
+    clusters ==1  ~ "Son gorusme 2,5 dakika , ortalama 15 kontakt sayisi",
+    clusters ==2  ~ "Son gorusme 3 dakika, ortalama 2 kontakt sayisi",
+    clusters ==3  ~ "Son gorusme 13 dakika, ortalama 2 kontakt sayisi ",
+  )
+)
+
+df$clusters_recode<-factor(df$clusters_recode)
+
+```
+
+
+# Z Test
+
+```{r}
+
+lapply(select_if(df,is.factor), function(variable) {
+  df %>%
+    tab_cells(variable) %>%
+    tab_cols(total(),y,clusters_recode) %>% 
+    tab_stat_cpct(total_row_position = "above") %>% #yuzde esaplamasi gerektigini soyluyoruz
+    tab_last_sig_cpct(min_base = 30) %>% #Anlamlilik testini uygulamasini min_base'i unutma default u 2 cunku 30 olmasi gerekir
+    tab_pivot() %>% 
+    set_caption("Table with summary statistics and significance marks.")
+  })
+
+
+```
+
+# Executive Summary /Actions
+
+For retired, student or management are more likely to accept offer. There 3 segments are splited by agetns's behaviors. We detected these segments with number of contacts performed during a campaign and last contact duration. If you look at test tables you can easily see segment 1:"Average last contact duration 13 min, average 2 contacts" has statiscial significant differences from other groups to subscribe to a term deposit. 
+
+
+
+```{r}
+
+cro_cpct(df$clusters_recode, df$y, total_label = "Sum", total_row_position = "above")
+
+
+ggplot(df) +
+  geom_bar(aes(x=y,y = (..count..)/sum(..count..)*100, fill=clusters_recode)) +
+  ylab("Percent")
+
+
+
+```
+
+Demografig info 
+Segment 1: blue-collar,retired,unemployed, /single,divorced/secondary 
+Segment 2: technician,management  /married /tertiary  
+Segment 3: retired,unemployed, /married,divorced/secondary 
+
+```{r}
+
+
+
+gp1<-ggplot() +
+  geom_bar(data=df[df$clusters_recode=="Son gorusme 2,5 dakika , ortalama 15 kontakt sayisi",], mapping=aes(x=clusters_recode, y = (..count..)/sum(..count..)*100,  fill=job),position="dodge") +
+    geom_bar(data=df[df$clusters_recode=="Son gorusme 3 dakika, ortalama 2 kontakt sayisi",], mapping=aes(x=clusters_recode, y = (..count..)/sum(..count..)*100,  fill=job),position="dodge") +
+  geom_bar(data=df[df$clusters_recode=="Son gorusme 13 dakika, ortalama 2 kontakt sayisi ",], mapping=aes(x=clusters_recode, y = (..count..)/sum(..count..)*100,  fill=job),position="dodge")
+
+
+gp2<-ggplot() +
+  geom_bar(data=df[df$clusters_recode=="Son gorusme 2,5 dakika , ortalama 15 kontakt sayisi",], mapping=aes(x=clusters_recode, y = (..count..)/sum(..count..)*100,  fill=marital),position="dodge") +
+    geom_bar(data=df[df$clusters_recode=="Son gorusme 3 dakika, ortalama 2 kontakt sayisi",], mapping=aes(x=clusters_recode, y = (..count..)/sum(..count..)*100,  fill=marital),position="dodge") +
+  geom_bar(data=df[df$clusters_recode=="Son gorusme 13 dakika, ortalama 2 kontakt sayisi ",], mapping=aes(x=clusters_recode, y = (..count..)/sum(..count..)*100,  fill=marital),position="dodge")
+
+gp3<-ggplot() +
+  geom_bar(data=df[df$clusters_recode=="Son gorusme 2,5 dakika , ortalama 15 kontakt sayisi",], mapping=aes(x=clusters_recode, y = (..count..)/sum(..count..)*100,  fill=education),position="dodge") +
+    geom_bar(data=df[df$clusters_recode=="Son gorusme 3 dakika, ortalama 2 kontakt sayisi",], mapping=aes(x=clusters_recode, y = (..count..)/sum(..count..)*100,  fill=education),position="dodge") +
+  geom_bar(data=df[df$clusters_recode=="Son gorusme 13 dakika, ortalama 2 kontakt sayisi ",], mapping=aes(x=clusters_recode, y = (..count..)/sum(..count..)*100,  fill=education),position="dodge")
+
+
+
+
+grid.arrange(gp1, gp2, gp3, nrow = 2)
+
+
+```
+
+
+
+
+
+Married people are more attended to be accept offers. Tertiary is alos powerfull info to say yes. Having a personal loan or house loan people are difficult to convince them to subscribe to a term deposit.
+
+Februrary March April and October are goog time to call people. These monthes people are more likely to stay home and not to waste their money.
+
+Whhen we examine day range, 10-14, 22-26 has significantly differences from other days. To keep duration at least 257 seconds has 2 times chance to subscribe to a term deposit.
+
+
+
+
+
+
+

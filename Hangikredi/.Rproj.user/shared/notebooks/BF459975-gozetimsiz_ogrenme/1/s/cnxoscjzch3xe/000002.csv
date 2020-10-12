@@ -1,0 +1,5 @@
+"0","k3 <- kmeans(df , centers = 3, nstart = 25)
+"
+"2","Zorlamadan dolay� ortaya ��kan NAs"
+"2","Error in do_one(nmeth) : dış fonksiyon çağrısında NA/NaN/Inf (argüman 1)
+"

@@ -1,0 +1,3 @@
+"0",""
+"0","# Biplot uzerinde gosterimi"
+"0","autoplot(prcomp(df %>% select_if(is.numeric)), data=df, colour=""class"", loadings=T,loadings.label = TRUE,loadings.colour = 'purple', frame=T )"

@@ -1,0 +1,5 @@
+"0","```r
+library(tidyverse) 
+library(cluster)    #kumeleme
+library(factoextra) #gorsel
+```"

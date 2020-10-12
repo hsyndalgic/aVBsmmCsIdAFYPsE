@@ -1,0 +1,1389 @@
+"0",""
+"0","ctrl <- trainControl(method=""cv"","
+"0","                     summaryFunction = twoClassSummary,"
+"0","                     classProbs = TRUE)"
+"0",""
+"0",""
+"0","nnetGrid <- expand.grid(size = 1:10,"
+"0","                         decay = c(0, 0.1, 1, 2))"
+"0",""
+"0","maxSize <- max(nnetGrid$size)"
+"0",""
+"0","numWts <- 1*(maxSize * (length(train_x) + 1) + maxSize + 1)"
+"0",""
+"0",""
+"0","nnet_tune <- train("
+"0","  train_x, train_y,"
+"0","  method = ""nnet"","
+"0","  metric = ""ROC"","
+"0","  tuneGrid = nnetGrid,"
+"0","  trace = FALSE, "
+"0","  maxit = 2000,"
+"0","  MaxNWts = numWts,"
+"0","  trControl = ctrl"
+"0","  "
+"0",")"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 3, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 4, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 5, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 6, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 7, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 8, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 9, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size=10, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 3, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 4, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 5, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 6, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 7, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 8, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 9, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size=10, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 3, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 4, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 5, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 6, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 7, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 8, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 9, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size=10, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 3, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 4, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 5, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 6, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 7, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 8, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size= 9, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold01: size=10, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 3, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 4, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 5, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 6, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 7, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 8, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 9, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size=10, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 3, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 4, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 5, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 6, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 7, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 8, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 9, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size=10, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 3, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 4, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 5, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 6, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 7, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 8, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 9, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size=10, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 3, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 4, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 5, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 6, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 7, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 8, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size= 9, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold02: size=10, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 3, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 4, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 5, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 6, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 7, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 8, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 9, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size=10, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 3, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 4, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 5, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 6, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 7, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 8, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 9, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size=10, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 3, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 4, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 5, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 6, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 7, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 8, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 9, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size=10, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 3, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 4, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 5, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 6, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 7, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 8, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size= 9, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold03: size=10, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 3, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 4, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 5, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 6, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 7, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 8, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 9, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size=10, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 3, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 4, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 5, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 6, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 7, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 8, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 9, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size=10, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 3, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 4, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 5, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 6, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 7, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 8, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 9, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size=10, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 3, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 4, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 5, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 6, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 7, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 8, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size= 9, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold04: size=10, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 3, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 4, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 5, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 6, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 7, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 8, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 9, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size=10, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 3, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 4, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 5, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 6, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 7, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 8, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 9, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size=10, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 3, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 4, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 5, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 6, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 7, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 8, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 9, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size=10, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 3, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 4, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 5, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 6, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 7, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 8, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size= 9, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold05: size=10, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 3, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 4, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 5, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 6, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 7, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 8, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 9, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size=10, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 3, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 4, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 5, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 6, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 7, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 8, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 9, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size=10, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 3, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 4, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 5, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 6, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 7, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 8, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 9, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size=10, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 3, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 4, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 5, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 6, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 7, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 8, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size= 9, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold06: size=10, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 3, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 4, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 5, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 6, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 7, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 8, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 9, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size=10, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 3, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 4, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 5, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 6, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 7, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 8, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 9, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size=10, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 3, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 4, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 5, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 6, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 7, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 8, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 9, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size=10, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 3, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 4, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 5, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 6, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 7, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 8, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size= 9, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold07: size=10, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 3, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 4, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 5, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 6, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 7, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 8, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 9, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size=10, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 3, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 4, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 5, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 6, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 7, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 8, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 9, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size=10, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 3, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 4, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 5, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 6, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 7, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 8, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 9, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size=10, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 3, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 4, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 5, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 6, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 7, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 8, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size= 9, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold08: size=10, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 3, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 4, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 5, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 6, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 7, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 8, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 9, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size=10, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 3, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 4, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 5, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 6, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 7, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 8, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 9, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size=10, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 3, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 4, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 5, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 6, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 7, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 8, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 9, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size=10, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 3, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 4, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 5, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 6, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 7, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 8, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size= 9, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold09: size=10, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 3, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 4, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 5, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 6, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 7, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 8, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 9, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size=10, decay=0.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 3, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 4, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 5, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 6, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 7, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 8, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 9, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size=10, decay=0.1 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 3, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 4, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 5, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 6, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 7, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 8, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 9, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size=10, decay=1.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 3, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (205) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 4, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (273) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 5, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (341) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 6, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (409) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 7, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (477) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 8, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (545) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size= 9, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (613) weights
+"
+"2","Setting row names on a tibble is deprecated."
+"2","model fit failed for Fold10: size=10, decay=2.0 Error in nnet.default(x, y, w, entropy = TRUE, ...) : 
+  too many (681) weights
+"
+"2","There were missing values in resampled performance measures."
+"2","missing values found in aggregated results"
+"2","Setting row names on a tibble is deprecated."
+"0","plot(nnet_tune)"

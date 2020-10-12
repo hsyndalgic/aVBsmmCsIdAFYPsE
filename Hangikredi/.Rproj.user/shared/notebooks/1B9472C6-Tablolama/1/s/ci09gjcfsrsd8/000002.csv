@@ -1,0 +1,12 @@
+"0","```r
+cro(mtcars$am, mtcars$vs)
+
+```"
+"1","                                                             
+ |              |              |   Engine |                 |
+ |              |              | V-engine | Straight engine |
+ | ------------ | ------------ | -------- | --------------- |
+ | Transmission |    Automatic |       12 |               7 |
+ |              |       Manual |        6 |               7 |
+ |              | #Total cases |       18 |              14 |
+"

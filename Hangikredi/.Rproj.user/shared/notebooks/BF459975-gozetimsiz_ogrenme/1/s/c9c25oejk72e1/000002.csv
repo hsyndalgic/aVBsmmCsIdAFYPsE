@@ -1,0 +1,10 @@
+"0","```r
+
+
+pca <- prcomp(USArrests, scale = TRUE)
+pca$rotation <- -pca$rotation
+pca$x <- -pca$x
+
+biplot(pca, scale = 0)
+
+```"

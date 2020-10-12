@@ -1,0 +1,8 @@
+"0","```r
+apply(df, 2, var)
+df <- scale(df)
+d <- dist(df, method = \"euclidean\")
+hc1 <- hclust(d, method = \"complete\")
+hc1
+plot(hc1)
+```"

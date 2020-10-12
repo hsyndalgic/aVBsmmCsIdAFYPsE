@@ -1,0 +1,8 @@
+"0","```r
+
+USArrests %>%
+  mutate(Cluster = final$cluster) %>%
+  group_by(Cluster) %>%
+  summarise_all(\"mean\")
+
+```"

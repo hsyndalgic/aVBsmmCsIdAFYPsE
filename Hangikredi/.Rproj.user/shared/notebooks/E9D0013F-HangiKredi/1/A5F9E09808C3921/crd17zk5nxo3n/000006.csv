@@ -1,0 +1,11 @@
+"0","defaultSummary(data.frame(obs = dataset[c(l$contact),]$contact,
+pred = knn_data[c(l$contact),]$contact))
+"
+"1","Accuracy "
+"1","   Kappa "
+"1","
+"
+"1","     0.5 "
+"1","     0.0 "
+"1","
+"

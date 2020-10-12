@@ -1,0 +1,7 @@
+"0",""
+"0",""
+"0","etiketler<-rep(""."",nrow(df))"
+"0","etiketler[all_outliers] <-all_outliers"
+"0",""
+"0","biplot(prcomp(df %>%"
+"0","     select_if(is.numeric)), cex = 1, xlabs = etiketler)"

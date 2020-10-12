@@ -1,0 +1,5 @@
+"0","df<-rbind(df,df_balance,df_balanced)
+"
+"2","Error in rbind(df, df_balance, df_balanced) : 
+  'df_balance' nesnesi bulunamadı
+"

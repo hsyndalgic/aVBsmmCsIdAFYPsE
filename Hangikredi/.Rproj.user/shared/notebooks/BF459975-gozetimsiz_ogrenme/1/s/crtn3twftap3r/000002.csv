@@ -1,0 +1,5 @@
+"0","```r
+
+hc2 <- agnes(df, method = \"complete\")
+hc2$ac
+```"
